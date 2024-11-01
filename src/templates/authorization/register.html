@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+{% block js %} {% endblock %}
+
+{% block content %}
+<div class="form-container d-flex justify-content-center align-items-center vh-100">
+    <form method="POST" class="p-3 rounded shadow-lg bg-body-tertiary" style="width: 100%; max-width: 400px;">
+        <h2 class="mb-4 text-center mx-auto">Зарегистрироваться</h2>
+        {{ form.csrf_token }}
+        <div class="mb-3">
+          {{ form.login.label(class="form-label") }}
+          {{ form.login(class="form-control text-center bg-secondary text-light border-0") }}
+        </div>
+        <div class="mb-3">
+          {{ form.email.label(class="form-label") }}
+          {{ form.email(class="form-control text-center bg-secondary text-right border-0") }}
+        </div>
+        <div class="mb-3">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-control text-center bg-secondary text-light border-0") }}
+        </div>
+        <div class="mb-3">
+          {{ form.password2.label(class="form-label") }}
+          {{ form.password2(class="form-control text-center bg-secondary text-light border-0") }}
+        </div>
+        <div class="d-grid gap-2 mb-3">
+          {{ form.submit(class="btn btn-primary btn-lg") }}
+        </div>
+        <p class="text-center">Есть аккаунт? <a href="/login" class="text-info">Войти</a></p>
+    </form>
+</div>
+{% endblock %}

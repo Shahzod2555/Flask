@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+
+{% if posts %}
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-header d-flex" style="justify-content: space-between;">
+        <a href="{{ url_for('profile_blueprint.profile_page', user_id=post.author_id)}}">{{ post.author.username }}</a>
+        <span>{{ post.create_date.strftime('%Y-%m-%d') }}</span>
+        {% if current_user.id == post.author_id and current_user.is_authenticated %}
+            <form action="{{ url_for('post_blueprint.delete_post', id_post=post.id) }}" method="POST">
+                <button class="btn btn-danger btn-sm" type="submit">Удалить пост</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.content }}</p>
+    </div>
+</div>
+{% endfor %}
+        {% else %}
+            <p class="text-center text-muted">Пока нет постов.</p>
+        {% endif %}
+
+{% endblock %}

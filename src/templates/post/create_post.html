@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<div class="form-container d-flex justify-content-center align-items-center vh-100">
+    <form method="POST" class="p-3 rounded shadow-lg bg-body-tertiary" style="width: 100%; max-width: 400px;">
+        {{ form.csrf_token }}
+        <div class="mb-3">
+          {{ form.title.label(class="form-label") }}
+          {{ form.title(class="form-control text-center bg-secondary text-light border-0") }}
+        </div>
+        <div class="mb-3">
+          {{ form.content.label(class="form-label") }}
+          {{ form.content(class="form-control text-center bg-secondary text-right border-0") }}
+        </div>
+        <div class="d-grid gap-2 mb-3">
+          {{ form.submit(class="btn btn-primary btn-lg") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="profile-header text-center">
+        <div class="profile-image mb-3">
+            <!-- Добавляем картинку профиля -->
+            <img src="{{ url_for('static', filename='image/img.png') }}" alt="Profile Picture" class="rounded-circle" width="120">
+        </div>
+        <h3>{{ user.username }}</h3>
+        <h6 class="text-muted">{{ user.email }}</h6>
+        <p class="text-muted">Зарегистрирован: {{ user.create_date.strftime('%Y-%m-%d') }}</p>
+        <hr class="my-4">
+    </div>
+
+        <h4 class="text-center">Количество постов: {{ user_posts | length }}</h4>
+        {% if user_posts %}
+            {% for post in user_posts %}
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header d-flex justify-content-between align-items-center ">
+                        <strong>{{ post.author.username }}</strong>
+                        <span>{{ post.create_date.strftime('%Y-%m-%d') }}</span>
+                        {% if user.id == post.author_id and current_user.is_authenticated %}
+                            <form action="{{ url_for('post_blueprint.delete_post', id_post=post.id) }}" method="POST">
+                                <button class="btn btn-danger btn-sm" type="submit">Удалить пост</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-muted">У пользователя пока нет постов.</p>
+        {% endif %}
+</div>
+
+{% endblock %}
