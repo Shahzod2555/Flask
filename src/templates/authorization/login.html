@@ -7,20 +7,20 @@
 {% block content %}
 <div class="form-container d-flex justify-content-center align-items-center vh-100">
     <form method="POST" class="p-3 rounded shadow-lg bg-body-tertiary" style="width: 100%; max-width: 400px;">
-        <h2 class="mb-4 text-center mx-auto">Войти</h2>
+        <h2 class="mb-3 text-center">Войти</h2>
         {{ form.csrf_token }}
         <div class="mb-3">
-          {{ form.login.label(class="form-label") }}
+          {{ form.login.label(class="form-label m-0") }}
           {{ form.login(class="form-control text-center bg-secondary text-light border-0") }}
         </div>
         <div class="mb-3">
-          {{ form.password.label(class="form-label") }}
+          {{ form.password.label(class="form-label m-0") }}
           {{ form.password(class="form-control text-center bg-secondary text-light border-0") }}
         </div>
-        <div class="d-grid gap-2 mb-3">
+        <div class="d-grid gap-2 my-4">
           {{ form.submit(class="btn btn-primary btn-lg") }}
         </div>
-        <p class="text-center">Нету аккаунта? <a href="/register" class="text-info">Зарегистрироваться</a></p>
+        <p class="text-center">Нету аккаунта? <a href="{{url_for('auth_blueprint.register')}}" class="text-info">Зарегистрироваться</a></p>
     </form>
 </div>
 {% endblock %}

@@ -23,13 +23,13 @@
                     <li><a class="dropdown-item" href="{{ url_for('profile_blueprint.profile_page') }}">Профиль</a></li>
                     <li><a class="dropdown-item" href="{{ url_for('post_blueprint.create_post') }}">Создать пост</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li class="d-flex"><a class="dropdown-item" href="{{ url_for('register_sign_in_blueprint.logout') }}">Выход</a>|<a class="dropdown-item" href="{{ url_for('profile_blueprint.delete_account') }}">Удалить аккаунт</a></li>
+                    <li class="d-flex"><a class="dropdown-item" href="{{ url_for('auth_blueprint.logout') }}">Выход</a>|<a class="dropdown-item" href="{{ url_for('profile_blueprint.delete_account') }}">Удалить аккаунт</a></li>
                     <li></li>
                 </ul>
             </div>
             {% else %}
             <p style="margin-bottom: 0; margin-left: auto;">
-                <a href="{{ url_for('register_sign_in_blueprint.sign_in') }}">Войти</a> | <a href="{{ url_for('register_sign_in_blueprint.register') }}">Зарегистрироваться</a>
+                <a href="{{ url_for('auth_blueprint.login') }}">Войти</a> | <a href="{{ url_for('auth_blueprint.register') }}">Зарегистрироваться</a>
             </p>
             {% endif %}
 
