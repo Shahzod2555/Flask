@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import current_user, login_required
 
+from ..extensions import db
 from ..models.post import Post
 from ..models.user import User
-from ..extensions import db
 
 profile = Blueprint('profile_blueprint', __name__)
 
@@ -27,26 +27,17 @@ def profile_page(user_id):
     )
 
 
-@profile.route('/delete/account/<int:id_account>', methods=['POST'])
+@profile.route('/delete/account')
 @login_required
-def delete_account(id_account):
-    account_to_delete = User.query.get(id=id_account)
-
-    if account_to_delete.id == current_user.id:
-        try:
-            db.session.delete(account_to_delete)
-            db.session.commit()
-            flash("Аккаунт успешно удален.", "success")
-            return redirect(url_for('main_blueprint.index'))
-        except Exception as e:
-            db.session.rollback()
-            print(e)
-            flash("Что-то пошло не так попробуйте позже")
-            return redirect(request.referrer or url_for('main_blueprint.index'))
-    elif account_to_delete.author_id != current_user.id:
-        flash("Ой иди ты в жопу это не твой аккаунт че ты его удаляешь?", "danger")
-        return redirect(request.referrer or url_for('main_blueprint.index'))
-    else:
+def delete_account():
+    try:
+        account = User.query.filter_by(id=current_user.id).first()
+        db.session.delete(account)
+        db.session.commit()
+        flash("Аккаунт успешно удален.", "success")
+        return redirect(url_for('main_blueprint.index'))
+    except Exception as e:
+        db.session.rollback()
+        print(e)
         flash("Что-то пошло не так попробуйте позже")
         return redirect(request.referrer or url_for('main_blueprint.index'))
-

@@ -18,13 +18,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {% if current_user.is_authenticated %}
             <div class="nav-item mt-3  btn-group" style="margin-left: auto;">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle"></i></a>
-                <ul class="dropdown-menu">
+                <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle"></i></button>
+                <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="{{ url_for('profile_blueprint.profile_page') }}">Профиль</a></li>
                     <li><a class="dropdown-item" href="{{ url_for('post_blueprint.create_post') }}">Создать пост</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{{ url_for('register_sign_in_blueprint.logout') }}">Выход</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('register_sign_in_blueprint.delete_account') }}">Удалить аккаунт</a></li>
+                    <li class="d-flex"><a class="dropdown-item" href="{{ url_for('register_sign_in_blueprint.logout') }}">Выход</a>|<a class="dropdown-item" href="{{ url_for('profile_blueprint.delete_account') }}">Удалить аккаунт</a></li>
+                    <li></li>
                 </ul>
             </div>
             {% else %}
