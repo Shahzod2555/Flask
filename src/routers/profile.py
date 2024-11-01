@@ -1,11 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import current_user, login_required
-
+from . import profile
 from ..extensions import db
 from ..models.post import Post
 from ..models.user import User
 
-profile = Blueprint('profile_blueprint', __name__)
 
 @profile.route('/profile', defaults={'user_id': None}, methods=['GET'])
 @profile.route('/profile/<int:user_id>', methods=['GET'])

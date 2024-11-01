@@ -3,9 +3,8 @@ from ..models.user import User
 from flask import redirect, render_template, request, flash, url_for
 from ..forms.user import RegisterForm, SignInForm
 from flask_login import login_user, login_required, logout_user
-from flask import Blueprint
+from . import register_sign_up
 
-register_sign_up = Blueprint('register_sign_in_blueprint', __name__)
 
 @register_sign_up.route('/register', methods=['GET', 'POST'])
 def register():

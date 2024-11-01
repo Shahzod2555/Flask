@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, flash
-
+from flask import render_template
+from . import main
 from ..models.post import Post
 from ..models.user import User
 
-main = Blueprint('main_blueprint', __name__)
 
 @main.route('/', methods=['GET'])
 def index():

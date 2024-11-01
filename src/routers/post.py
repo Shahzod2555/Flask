@@ -2,10 +2,9 @@ from ..extensions import db
 from ..forms.post import CreatePostForm
 from ..models.post import Post
 from flask import redirect, render_template, request, url_for, flash, abort
-from flask import Blueprint
+from . import post
 from flask_login import current_user, login_required
 
-post = Blueprint('post_blueprint', __name__)
 
 @post.route('/create/post', methods=['GET', 'POST'])
 @login_required
